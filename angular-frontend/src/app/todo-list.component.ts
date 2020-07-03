@@ -5,7 +5,8 @@ import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'todo-list',
-  templateUrl: './todo-list.component.html'
+  templateUrl: './todo-list.component.html',
+  styleUrls: ['./todo-list.component.css']
 })
 
 export class TodoListComponent implements OnInit {
@@ -31,6 +32,7 @@ export class TodoListComponent implements OnInit {
     this.todoService.createTodo(this.newTodo)
       .then(createTodo => {        
         todoForm.reset();
+        // console.log(this.newTodo.createdAt);
         this.newTodo = new Todo();
         this.todos.unshift(createTodo)
       });

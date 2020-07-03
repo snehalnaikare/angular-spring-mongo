@@ -8,17 +8,32 @@ import { AppComponent } from './app.component';
 
 import { TodoListComponent } from './todo-list.component';
 import { TodoService } from './todo.service';
+import { DemoComponent } from './demo/demo.component';
+import { AddmenuComponent } from './addmenu/addmenu.component';
+import { DisplayMenuComponent } from './display-menu/display-menu.component';
+import {HttpClientModule} from '@angular/common/http'
+import {HttpserviceService} from './service/httpservice.service'
+import { UploadFileService } from './service/upload-file.service';
+
 @NgModule({
   declarations: [
     AppComponent,
-    TodoListComponent
+    TodoListComponent,
+    DemoComponent,
+    AddmenuComponent,
+    DisplayMenuComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    HttpClientModule
   ],
-  providers: [TodoService],
+  providers: [
+    TodoService,
+    HttpserviceService,
+    UploadFileService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
