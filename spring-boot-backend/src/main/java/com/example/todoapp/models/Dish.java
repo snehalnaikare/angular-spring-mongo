@@ -26,6 +26,9 @@ public class Dish {
 	
     @NotBlank
 	private String vegNonVeg;
+    
+    @NotBlank
+	private String imgName;
 	
 	private boolean availability;
 	
@@ -38,18 +41,37 @@ public class Dish {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Dish(String restaurantName, String dishName, int price, String category, String vegNonveg,
+	public Dish(String id,String restaurantName, String dishName, int price, String category, String vegNonVeg,
 			boolean availability, @Size(max = 100) String description) {
 		super();
+		this.id=id;
 		this.restaurantName = restaurantName;
 		this.dishName = dishName;
 		this.price = price;
 		this.category = category;
-		this.vegNonVeg = vegNonveg;
+		this.vegNonVeg = vegNonVeg;
 		this.availability = availability;
 		this.description = description;
 	}
 	
+	
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getImgName() {
+		return imgName;
+	}
+
+	public void setImgName(String imgName) {
+		this.imgName = imgName;
+	}
+
 	public String getRestaurantName() {
 		return restaurantName;
 	}
@@ -82,7 +104,7 @@ public class Dish {
 		this.category = category;
 	}
 
-	public String getVegNonveg() {
+	public String getVegNonVeg() {
 		return vegNonVeg;
 	}
 

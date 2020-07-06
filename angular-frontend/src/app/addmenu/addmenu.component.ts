@@ -7,6 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {HttpserviceService} from '../service/httpservice.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { UploadFileService} from '../service/upload-file.service'
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-addmenu',
@@ -15,205 +16,40 @@ import { UploadFileService} from '../service/upload-file.service'
 })
 export class AddmenuComponent implements OnInit {
   newdish: Dish = new Dish();
+  updateDish: Dish= new Dish();
+
   head: HttpHeaders;
   disharray: Dish[]=[];
-  // =[
-  //   {
-  //    restaurantName: 'rest1',
-  //    dishName:  'masal bhat',
-  //    price: 45,
-  //    category: 'rice',
-  //    vegNonVeg: 'veg',
-  //    availability :true,
-  //    description :"A card is a flexible and extensible content container. It includes options for headers and footers, a wide variety of content"
-  //   },
-  //   {
-  //     restaurantName: 'rest1',
-  //    dishName:  'curd rice',
-  //    price: 85,
-  //    category: 'rice',
-  //    vegNonVeg: 'nonveg',
-  //    availability :false,
-  //    description :"A card is a flexible and extensible content container. It includes options for headers and footers, a wide variety of content"
-  //   },
-  //   {
-  //     restaurantName: 'rest1',
-  //    dishName:  'fried rice',
-  //    price: 55,
-  //    category: 'rice',
-  //    vegNonVeg: 'veg',
-  //    availability :true,
-  //    description :"A card is a flexible and extensible content container. It includes options for headers and footers, a wide variety of content"
-  //   },
-  //   {
-  //     restaurantName: 'rest1',
-  //    dishName:  'pulao',
-  //    price: 75,
-  //    category: 'rice',
-  //    vegNonVeg: 'nonveg',
-  //    availability :true,     
-  //    description :"A card is a flexible and extensible content container. It includes options for headers and footers, a wide variety of content"
-  //   },
-  //   {
-  //     restaurantName: 'rest1',
-  //    dishName:  'pulao',
-  //    price: 75,
-  //    category: 'rice',
-  //    vegNonVeg: 'veg',
-  //    availability :true,
-  //    description :"A card is a flexible and extensible content container. It includes options for headers and footers, a wide variety of content"
-  //   },
-  //   {
-  //     restaurantName: 'rest1',
-  //    dishName:  'pulao',
-  //    price: 75,
-  //    category: 'rice',
-  //    vegNonVeg: 'veg',
-  //    availability :true,
-  //    description :"A card is a flexible and extensible content container. It includes options for headers and footers, a wide variety of content"
-  //   },
-  //   {
-  //     restaurantName: 'rest1',
-  //    dishName:  'pulao',
-  //    price: 75,
-  //    category: 'rice',
-  //    vegNonVeg: 'veg',
-  //    availability :true,
-  //    description :"A card is a flexible and extensible content container. It includes options for headers and footers, a wide variety of content"
-  //   },  
-  //   {
-  //     restaurantName: 'rest1',
-  //    dishName:  'pulao',
-  //    price: 75,
-  //    category: 'rice',
-  //    vegNonVeg: 'veg',
-  //    availability :false,
-  //    description :"A card is a flexible and extensible content container. It includes options for headers and footers, a wide variety of content"
-  //   },
-  //   {
-  //     restaurantName: 'rest1',
-  //    dishName:  'pulao',
-  //    price: 75,
-  //    category: 'rice',
-  //    vegNonVeg: 'veg',
-  //    availability :true,
-  //    description :"A card is a flexible and extensible content container. It includes options for headers and footers, a wide variety of content"
-  //   },
-  //   {
-  //     restaurantName: 'rest1',
-  //    dishName:  'pulao',
-  //    price: 75,
-  //    category: 'rice',
-  //    vegNonVeg: 'nonveg',
-  //    availability :false,
-  //    description :"A card is a flexible and extensible content container. It includes options for headers and footers, a wide variety of content"
-  //   },
-  //   {
-  //     restaurantName: 'rest1',
-  //    dishName:  'pulao',
-  //    price: 75,
-  //    category: 'rice',
-  //    vegNonVeg: 'nonveg',
-  //    availability :false,
-  //    description :"A card is a flexible and extensible content container. It includes options for headers and footers, a wide variety of content"
-  //   },    
-  //   {
-  //     restaurantName: 'rest1',
-  //    dishName:  'pulao',
-  //    price: 75,
-  //    category: 'rice',
-  //    vegNonVeg: 'nonveg',
-  //    availability :true,
-  //    description :"A card is a flexible and extensible content container. It includes options for headers and footers, a wide variety of content"
-  //   },    
-  //   {
-  //     restaurantName: 'rest1',
-  //    dishName:  'pulao',
-  //    price: 75,
-  //    category: 'rice',
-  //    vegNonVeg: 'nonveg',
-  //    availability :false,
-  //    description :"A card is a flexible and extensible content container. It includes options for headers and footers, a wide variety of content"
-  //   },
-  //   {
-  //     restaurantName: 'rest1',
-  //    dishName:  'masal dosa',
-  //    price: 45,
-  //    category: 'south indian',
-  //    vegNonVeg: 'veg',
-  //    availability :true,
-  //    description :"A card is a flexible and extensible content container. It includes options for headers and footers, a wide variety of content"
-  //   },
-  //   {
-  //     restaurantName: 'rest1',
-  //    dishName:  'rawa dosa',
-  //    price: 35,
-  //    category: 'south indian',
-  //    vegNonVeg: 'nonveg',
-  //    availability :false,
-  //    description :"A card is a flexible and extensible content container. It includes options for headers and footers, a wide variety of content"
-  //   },
-  //   {
-  //     restaurantName: 'rest1',
-  //    dishName:  'sada dosa',
-  //    price: 40,
-  //    category: 'south indian',
-  //    vegNonVeg: 'veg',
-  //    availability :false,
-  //    description :"A card is a flexible and extensible content container. It includes options for headers and footers, a wide variety of content"
-  //   },
-  //   {
-  //     restaurantName: 'rest1',
-  //    dishName:  'manturian',
-  //    price: 60,
-  //    category: 'chienese',
-  //    vegNonVeg: 'nonveg',
-  //    availability :false,
-  //    description :"A card is a flexible and extensible content container. It includes options for headers and footers, a wide variety of content"
-  //   },
-  //   {
-  //     restaurantName: 'rest1',
-  //    dishName:  'hakka noodles',
-  //    price: 46,
-  //    category: 'chienese',
-  //    vegNonVeg: 'nonveg',
-  //    availability :true,
-  //    description :"A card is a flexible and extensible content container. It includes options for headers and footers, a wide variety of content"
-  //   },
-  //   {
-  //     restaurantName: 'rest1',
-  //    dishName:  'schezwan noodles',
-  //    price: 68,
-  //    category: 'chienese',
-  //    vegNonVeg: 'veg',
-  //    availability :true,
-  //    description :"A card is a flexible and extensible content container. It includes options for headers and footers, a wide variety of content"
-  //   }
-  // ]
+
   categorySort: any;
 
   selectedFiles: FileList;
+
   currentFile: File;
   progress = 0;
   message = '';
-
+  errMsg="";
 
   private baseUrl = 'http://localhost:8080';
+
+  successAlertClosed: boolean;
+  failAlertClose:boolean;
+  showUpdate: boolean=false;
+  successmsg: string;
 
 
   constructor(private http: HttpClient,private httpservice: HttpserviceService,private uploadService: UploadFileService) {
     this.newdish.description="";
     this.newdish.availability=false;
     this.head = new HttpHeaders().set('access-control-allow-origin', this.baseUrl);
+    this.successAlertClosed=false;
+    this.failAlertClose=false;
+    this.currentFile=undefined;
+    this.showUpdate=false;
    }
 
   ngOnInit() {
-    //   this.categorySort = this.disharray.reduce(function (r, a) {
-    //     r[a.category] = r[a.category] || [];
-    //     r[a.category].push(a);
-    //     return r;
-    // }, Object.create(null));
-    // console.log(this.categorySort);
+    this.callGetAllDishes();
   }
 
   catSort(){
@@ -231,58 +67,60 @@ export class AddmenuComponent implements OnInit {
   }
  
   submitAddDish(form: NgForm): void {
-    console.log(this.newdish);
     this.createDish(this.newdish);
-    // this.createDish(this.newdish)
-    // .then(createTodo => {        
-    //   form.reset();
-    //   // console.log(this.newTodo.createdAt);
-    // this.newdish = new Dish();
-    // this.newdish.description='';
-    // this.newdish.availability=false;
-    // });
-
-    // this.newdish = new Dish();
-    // this.newdish.description='';
-    // this.newdish.availability=false;
   }
 
-
+  createDishReq(dishObj: Dish): Observable<Dish>{
+       return this.http.post<Dish>(this.baseUrl + '/dishdata/dishes/', dishObj, { headers: this.head });
+  }
 
   createDish(dishObj: Dish)
-  // : Promise<Dish> {
-  //   return this.http.post(this.baseUrl + '/dishdata/dishes/', dishObj)
-  //     .toPromise().then(response => { console.log(response);})
-  //     .catch(this.handleError);
-  // }
  {
-    this.http.post(this.baseUrl + '/dishdata/dishes/', dishObj, { headers: this.head })
+    dishObj.dishName=dishObj.dishName.toLowerCase();
+    dishObj.restaurantName=dishObj.restaurantName.toLowerCase();
+    dishObj.category=dishObj.category.toLowerCase();
+    this.renameFile(this.newdish.dishName+this.newdish.restaurantName);
+    dishObj.imgName=this.currentFile.name;
+    // var element = document.getElementById("currentFileName").value;
+    console.log(dishObj.imgName);
+    this.createDishReq(dishObj)
       .subscribe(
         res => {
           console.log(res);
+          this.disharray.unshift(res)
         },
         err => {
           console.log(err);
+          this.newdish = new Dish();
+          this.newdish.description='';
+          this.newdish.availability=false;
+          //this.errMsg=err.error['message'];
+          this.errMsg="dish Already exist."
+          this.failAlertClose =true;
+          setTimeout(() => {this.failAlertClose = false;this.errMsg='';}, 2000);
         },
         () => {console.log('HTTP request completed.');
-               this.disharray.unshift(this.newdish);
+              //  this.disharray.unshift(this.newdish);
+               this.upload(this.newdish.dishName + this.newdish.restaurantName);
                this.newdish = new Dish();
                this.newdish.description='';
                this.newdish.availability=false;
                this.catSort();
-              }
+              }              
       );
       
   }
 
   selectFile(event) {
     this.selectedFiles = event.target.files;
+    console.log(this.selectedFiles.item(0).name);
+    this.currentFile = this.selectedFiles.item(0);
   }
 
-  upload() {
-    this.progress = 0;
-  
+  upload(filename : string) {
+    this.progress = 0;  
     this.currentFile = this.selectedFiles.item(0);
+    this.renameFile(filename);
     this.uploadService.upload(this.currentFile).subscribe(
       event => {
         if (event.type === HttpEventType.UploadProgress) {
@@ -296,15 +134,103 @@ export class AddmenuComponent implements OnInit {
         this.progress = 0;
         this.message = 'Could not upload the file!';
         this.currentFile = undefined;
-      });
+
+        this.errMsg=err.error['message'];
+          this.failAlertClose =true;
+          setTimeout(() => {this.failAlertClose = false;this.errMsg='';}, 5000);
+      },
+      ()=>{
+        this.successAlertClosed =true;
+        this.successmsg="Added Successfully !!!"
+        setTimeout(() => {this.successmsg="";this.successAlertClosed = false;}, 5000);
+        this.currentFile=undefined;
+      }
+      );
   
     this.selectedFiles = undefined;
   }
 
-private handleError(error: any): Promise<any> {
-      // console.error('Some error occured', error);
-      return Promise.reject(error.message || error);
+  renameFile(name: string): void {
+    name=name+'.'+this.currentFile.type.split('/')[1];
+    const oldFileItem: File = this.currentFile;
+    this.currentFile = new File([this.currentFile], name.replace(" ",""), {type: oldFileItem.type});
+  }
+
+getAllDishes(): Observable<Dish[]> {
+      return this.http.get<Dish[]>(this.baseUrl + '/dishdata/allDishes', { headers: this.head });
     }
+
+callGetAllDishes(){
+  this.getAllDishes().subscribe(
+  response => {
+      console.log(response);
+      this.disharray=response;
+  },
+  err => {
+    console.log(err);
+  },
+  () => {
+    this.catSort();
+  }
+);
+}
+
+
+
+availableToggle( dishData: Dish){
+   console.log(dishData);
+    this.http.put(this.baseUrl + '/dishdata/dishes/' + dishData.id, dishData, { headers: this.head })
+    .subscribe(
+      res=>{
+        console.log(res);
+      },
+      err =>{
+        console.log(err);
+      },
+      ()=>{
+        this.successAlertClosed =true;
+        this.successmsg="Updated Successfully !!!"
+        setTimeout(() => {this.successmsg="";this.successAlertClosed = false;}, 5000);
+        this.currentFile=undefined;
+        this.updateDish= new Dish();
+        this.closeUpdateDish();
+      }
+    );
+} 
+
+openUpdateDish(dish:Dish){
+  this.updateDish=dish;
+  this.showUpdate=true;
+}
+
+closeUpdateDish(){
+  if(this.showUpdate==true)
+  {this.showUpdate=!this.showUpdate;}
+  this.updateDish=new Dish();
+}
+
+deleteDish(dish:Dish){
+  console.log(dish.dishName);
+  this.http.delete(this.baseUrl + '/dishdata/dishes/' + dish.id, { headers: this.head })
+  .subscribe(
+    res=>{
+      console.log(res);
+    },
+    err =>{
+      console.log(err);
+    },
+    ()=>{
+      this.disharray = this.disharray.filter((item) => item.id !== dish.id);
+      this.catSort();
+      
+      this.successAlertClosed =true;
+      this.successmsg="deleted Successfully !!!"
+      setTimeout(() => {this.successmsg="";this.successAlertClosed = false;}, 5000);
+      this.currentFile=undefined;
+    }
+  );
+}
+
 
 
 }

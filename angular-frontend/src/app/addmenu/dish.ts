@@ -1,5 +1,5 @@
 export class Dish {
-
+    id: string;
     restaurantName:string;
     dishName: string;
     price: number;
@@ -7,4 +7,5 @@ export class Dish {
     vegNonVeg : string;
     availability : boolean;
     description: string;
+    imgName: string;
   }

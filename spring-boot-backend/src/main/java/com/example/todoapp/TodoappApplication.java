@@ -30,7 +30,7 @@ public class TodoappApplication implements CommandLineRunner{
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/dishdata").allowedOrigins("*").allowedHeaders("*");
+				registry.addMapping("/dishdata").allowedOrigins("*").allowedHeaders("*").allowedMethods("PUT","DELETE","POST","OPTIONS","GET");
 				registry.addMapping("/**").allowedOrigins("*").allowedHeaders("*").allowedMethods("PUT","DELETE","POST","OPTIONS","GET");
 			}
 		};
