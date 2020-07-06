@@ -1,4 +1,4 @@
-package com.bezkoder.spring.files.upload.service;
+package com.example.files.upload.service;
 
 import java.io.IOException;
 import java.net.MalformedURLException;

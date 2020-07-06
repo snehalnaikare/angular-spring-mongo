@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.bezkoder.spring.files.upload.service.FilesStorageService;
+import com.example.files.upload.service.FilesStorageService;
 
 
 

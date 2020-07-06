@@ -182,6 +182,12 @@ availableToggle( dishData: Dish){
     this.http.put(this.baseUrl + '/dishdata/dishes/' + dishData.id, dishData, { headers: this.head })
     .subscribe(
       res=>{
+        this.disharray = this.disharray.filter((item) => item.id !== dishData.id);
+        this.catSort();
+
+        this.disharray.unshift(dishData);
+        this.catSort();
+
         console.log(res);
       },
       err =>{

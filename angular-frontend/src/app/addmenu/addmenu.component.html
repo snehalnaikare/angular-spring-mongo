@@ -98,7 +98,8 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title font-italic" id="exampleModalLabel">Add New Dish</h5>
+          <h5 class="modal-title font-italic" *ngIf="!showUpdate" id="exampleModalLabel">Add New Dish</h5>
+          <h5 class="modal-title font-italic" *ngIf="showUpdate" id="exampleModalLabel">Update Dish</h5>
           <button type="button" class="close" data-dismiss="modal" (click)="closeUpdateDish()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
